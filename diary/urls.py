@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 
+
 urlpatterns = [
     path('',views.home, name='home'),
     path('signup/',views.signup_view,name = 'signup'),
@@ -24,5 +25,10 @@ urlpatterns = [
 
     path('edit-diary/<int:diary_id>/', views.edit_diary, name='edit_diary'),
 
-    path('delete-diary/<int:diary_id>/', views.delete_diary, name='delete_diary')
+    path('delete-diary/<int:diary_id>/', views.delete_diary, name='delete_diary'),
+
+    # Admin User Management
+    path('admin-panel/users/', views.admin_user_list, name='admin_user_list'),
+    path('admin-panel/users/block/<int:user_id>/', views.toggle_user_block, name='toggle_user_block'),
+    path('admin-panel/users/diary-block/<int:user_id>/',views.toggle_diary_block, name='toggle_diary_block')
 ]

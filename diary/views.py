@@ -1,16 +1,17 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from .models import DiaryEntry
 from textblob import TextBlob
+from django.contrib.auth import get_user_model
 
 
 
 # Create your views here.
 
+CustomUser = get_user_model()
 
 # Home Page
 @login_required(login_url='login')
@@ -23,10 +24,10 @@ def signup_view(request):
         username = request.POST['username']
         email = request.POST['email']
         password = request.POST['password']
-        if User.objects.filter(username=username).exists():
+        if CustomUser.objects.filter(username=username).exists():
             messages.error(request, 'Username already exists')
             return redirect('signup')
-        user = User.objects.create_user(username=username, email=email, password=password)
+        user = CustomUser.objects.create_user(username=username, email=email, password=password)
         user.save()
         messages.success(request, 'Account created successfully')
         return redirect('login')
@@ -39,12 +40,16 @@ def login_view(request):
         password = request.POST['password']
         user = authenticate(request,username=username, password=password)
         if user is not None:
+            if hasattr(user, 'is_blocked') and user.is_blocked:
+                messages.error(request, "Your account has been blocked by the admin.")
+                return redirect('login')
             login(request, user)
             return redirect('home')
         else:
-            messages.error(request, "Invalid credentials")
+            messages.error(request, "Invalid Credentials.")
             return redirect('login')
     return render(request, 'diary/login.html')
+
 
 # Logout
 def logout_view(request):
@@ -71,9 +76,36 @@ def admin_dashboard(request):
     return render(request, 'diary/admin_dashboard.html')
 
 
+# Admin User List
+@staff_member_required(login_url='admin_login')
+def admin_user_list(request):
+    users = CustomUser.objects.filter(is_staff=False)
+    return render(request, 'diary/admin_user_list.html', {'users': users})
+
+# Admin User Block/Unblock
+@staff_member_required(login_url='admin_login')
+def toggle_user_block(request, user_id):
+    user = CustomUser.objects.get(id = user_id)
+    user.is_blocked = not user.is_blocked
+    user.save()
+    return redirect('admin_user_list')
+
+# Admin User Diary Block/Unblock
+@staff_member_required(login_url='admin_login')
+def toggle_diary_block(request, user_id):
+    user = CustomUser.objects.get(id=user_id)
+    user.is_diary_blocked = not user.is_diary_blocked
+    user.save()
+    return redirect('admin_user_list')
+
+
 # Create Diary
 @login_required
 def create_diary(request):
+    if request.user.is_diary_blocked:
+        messages.error(request, "You are restricted from creating diary entries.")
+        return redirect('home')
+    
     if request.method == 'POST':
         title = request.POST['title']
         content = request.POST['content']
@@ -97,18 +129,29 @@ def create_diary(request):
 # Diary List View
 @login_required
 def diary_list(request):
+    if request.user.is_diary_blocked:
+        messages.error(request, "You are restricted from viewing your diaries.")
+        return redirect('home')
+    
     diaries = DiaryEntry.objects.filter(user=request.user).order_by('-created_at')
     return render(request, 'diary/diary_list.html', {'diaries': diaries})
 
 # Diary Detail View
 @login_required
 def diary_detail(request, diary_id):
+    if request.user.is_diary_blocked:
+        messages.error(request, "You are restricted from accessing diary entries.")
+
     diary = DiaryEntry.objects.get(id=diary_id, user=request.user)
     return render(request, 'diary/diary_detail.html', {'diary':diary})
 
 # Edit Diary Entry
 @login_required
 def edit_diary(request, diary_id):
+    if request.user.is_diary_blocked:
+        messages.error(request, "You are restricted from editing diary entries.")
+        return redirect('home')
+    
     diary = DiaryEntry.objects.get(id=diary_id, user=request.user)
     if request.method == 'POST':
         diary.title = request.POST['title']

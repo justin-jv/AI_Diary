@@ -29,6 +29,8 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+AUTH_USER_MODEL = 'diary.CustomUser'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -77,7 +79,7 @@ WSGI_APPLICATION = 'diary_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'diarydb',
+        'NAME': 'diary_db',
         'USER': 'postgres',
         'PASSWORD': '1234',  # replace with your PostgreSQL password
         'HOST': 'localhost',
@@ -122,6 +124,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

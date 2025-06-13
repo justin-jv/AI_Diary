@@ -1,0 +1,34 @@
+{% extends 'diary/base.html' %}
+{% block content %}
+<h2>All Users</h2>
+<table border="1" cellpadding="8" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Blocked</th>
+            <th>Diary Blocked</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.is_blocked }}</td>
+            <td>{{ user.diary_blocked }}</td>
+            <td>
+                <a href="{% url 'toggle_user_block' user.id %}">
+                    {% if user.is_blocked %}Unblock{% else %}Block{% endif %}
+                </a>
+                |
+                <a href="{% url 'toggle_diary_block' user.id %}">
+                    {% if user.diary_blocked %}Unblock Diary{% else %}Block Diary{% endif %}
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
