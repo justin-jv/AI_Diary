@@ -34,8 +34,15 @@ urlpatterns = [
     path('admin-panel/users/diary-block/<int:user_id>/',views.toggle_diary_block, name='toggle_diary_block'),
 
     # Password Reset Urls
-    path('reset-password/', auth_views.PasswordResetView.as_view(template_name='diary/reset_password.html'), name='password_reset'),
-    path('reset-password-sent/', auth_views.PasswordResetDoneView.as_view(template_name='diary/reset_password_sent.html'), name='password_reset_done'),
-    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='diary/reset_password_confirm.html'), name='password_reset_confirm'),
-    path('reset-password-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='diary/reset_password_complete.html'), name='password_reset_complete'),
+    # path('reset-password/', auth_views.PasswordResetView.as_view(template_name='diary/reset_password.html'), name='password_reset'),
+    # path('reset-password-sent/', auth_views.PasswordResetDoneView.as_view(template_name='diary/reset_password_sent.html'), name='password_reset_done'),
+    # path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='diary/reset_password_confirm.html'), name='password_reset_confirm'),
+    # path('reset-password-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='diary/reset_password_complete.html'), name='password_reset_complete'),
+
+    # Password Reset Urls
+    path('forgot-password/', views.forgot_password_view, name='forgot_password'),
+    path('reset-password/<uidb64>/<token>/', views.reset_password_view, name='reset_password'),
+    
+
+
 ]

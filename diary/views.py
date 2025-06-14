@@ -6,7 +6,13 @@ from django.contrib.admin.views.decorators import staff_member_required
 from .models import DiaryEntry
 from textblob import TextBlob
 from django.contrib.auth import get_user_model
-
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes
+from django.template.loader import render_to_string
+from django.contrib.auth.tokens import default_token_generator
+from django.core.mail import send_mail
+from django.conf import settings
+from django.contrib.auth.hashers import make_password
 
 
 # Create your views here.
@@ -172,3 +178,56 @@ def delete_diary(request, diary_id):
     diary.delete()
     messages.success(request, 'Diary Deleted Successfully!!')
     return redirect('diary_list')
+
+
+# Forgot Password
+def forgot_password_view(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        try:
+            user = CustomUser.objects.get(email=email)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            token = default_token_generator.make_token(user)
+            reset_url = request.build_absolute_uri(f'/reset-password/{uid}/{token}/')
+
+            subject = 'Reset Your Password'
+            message = render_to_string('diary/password_reset_email.html',{
+                'user': user,
+                'reset_url': reset_url
+            })
+
+            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email])
+            messages.success(request, 'Password reset link has been sent to your email.')
+            return redirect('forgot_password')
+        except CustomUser.DoesNotExist:
+            messages.error(request, 'Email Not Found.')
+            return redirect('forgot_password')
+        
+    return render(request, 'diary/forgot_password.html')
+
+# Reset Password
+def reset_password_view(request, uidb64, token):
+    try:
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = CustomUser.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, CustomUser.DoesNotExist):
+        user = None
+
+    
+    if user is not None and default_token_generator.check_token(user, token):
+        if request.method == 'POST':
+            password = request.POST.get('password')
+            confirm_password = request.POST.get('confirm_password')
+            if password != confirm_password:
+                messages.error(request, 'Passwords do not match')
+                return redirect(request.path)
+
+            user.password = make_password(password)
+            user.save()
+            messages.success(request, 'Password has been reset. You can now log in.')
+            return redirect('login')
+        
+        return render(request, 'diary/reset_password.html')
+    else:
+        messages.error(request, 'Invalid or expired link')
+        return redirect('forgot_password')
