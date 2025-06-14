@@ -44,6 +44,20 @@
     </div>
 
     {% block content %}{% endblock %}
+
+     <!-- ✅ Bootstrap JS (make close button work) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- ✅ Auto-dismiss after 3 seconds -->
+    <script>
+        setTimeout(function () {
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(alert => {
+                const bsAlert = new bootstrap.Alert(alert);
+                bsAlert.close();
+            });
+        }, 3000);
+    </script>
 </body>
 </html>
 
