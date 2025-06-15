@@ -13,7 +13,7 @@ urlpatterns = [
     path('admin-login/', views.admin_login, name='admin_login'),
     path('admin-dashboard/', views.admin_dashboard, name='admin_dashboard'),
 
-    # Create Directory
+    # Create Diary
     path('create-diary/', views.create_diary, name='create_diary'),
 
 
@@ -33,7 +33,7 @@ urlpatterns = [
     path('admin-panel/users/block/<int:user_id>/', views.toggle_user_block, name='toggle_user_block'),
     path('admin-panel/users/diary-block/<int:user_id>/',views.toggle_diary_block, name='toggle_diary_block'),
 
-    # Password Reset Urls
+    # Password Reset Urls using Django's built-in Password Reset System
     # path('reset-password/', auth_views.PasswordResetView.as_view(template_name='diary/reset_password.html'), name='password_reset'),
     # path('reset-password-sent/', auth_views.PasswordResetDoneView.as_view(template_name='diary/reset_password_sent.html'), name='password_reset_done'),
     # path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='diary/reset_password_confirm.html'), name='password_reset_confirm'),
@@ -42,7 +42,7 @@ urlpatterns = [
     # Password Reset Urls
     path('forgot-password/', views.forgot_password_view, name='forgot_password'),
     path('reset-password/<uidb64>/<token>/', views.reset_password_view, name='reset_password'),
-    
+
 
 
 ]
