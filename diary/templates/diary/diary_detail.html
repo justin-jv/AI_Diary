@@ -2,7 +2,12 @@
 {% block content %}
 <h2>{{ diary.title }}</h2>
 <p>{{ diary.content }}</p>
+
+{% comment %}
 <small>Created on: {{ diary.created_at }}</small>
+{% endcomment %}
+
+<p><strong>Created on: </strong> {{ diary.created_at|date:"F d, Y \\a\\t h:i A"}}</p>
 <br><br>
 <a href="{% url 'diary_list' %}">Back to All Diaries</a>
 {% endblock %}

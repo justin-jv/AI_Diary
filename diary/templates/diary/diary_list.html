@@ -6,7 +6,12 @@
     <div>
         <h3>{{ diary.title }}</h3>
         <p>{{ diary.content|truncatewords:20 }}</p>
-        <small>Created at: {{ diary.created_at }}</small><br>
+
+        {% comment %}
+        <small>Created at: {{ diary.created_at }}</small><br> 
+        {% endcomment %}
+        
+        <p><strong>Created on: </strong> {{ diary.created_at|date:"F d, Y \\a\\t h:i A"}}</p>
         <small>Mood: {{diary.sentiment|capfirst }}</small><br>
         <a href="{% url 'diary_detail' diary.id %}">View</a> |
         <a href="{% url 'edit_diary' diary.id %}">Edit</a> |
