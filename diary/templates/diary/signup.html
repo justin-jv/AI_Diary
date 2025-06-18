@@ -1,30 +1,41 @@
 {% extends 'diary/base.html' %}
-
 {% block content %}
-<h2>Signup</h2>
-<form method="POST">
-    {% csrf_token %}
-    <input type="text" name="username" placeholder="Username" required><br>
-    <input type="email" name="email" placeholder="Email" required><br>
-    <div style="position: relative;">
-        <input type="password" name="password" id="signupPassword" placeholder="Password" required style="padding-right: 0px;">
-        <i class="fa-solid fa-eye" id="toggleSignupPassword"
-           style="position: absolute; top: 50%; right: 530px; transform: translateY(-50%); cursor: pointer;"></i>
-    </div><br>
-    <button type="submit">Signup</button>
-</form>
-<a href="{% url 'login' %}">Already have an account? Login</a>
+<div class="login-body">
+  <div class="login-wrapper">
+    <div class="login-card">
+      <h2>Create Account</h2>
+      <form method="POST">
+        {% csrf_token %}
 
-<script>
-    const signupPasswordInput = document.getElementById("signupPassword");
-    const toggleSignupIcon = document.getElementById("toggleSignupPassword");
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required />
+        </div>
 
-    toggleSignupIcon.addEventListener("click", () => {
-        const isPassword = signupPasswordInput.type === "password";
-        signupPasswordInput.type = isPassword ? "text" : "password";
-        toggleSignupIcon.classList.toggle("fa-eye");
-        toggleSignupIcon.classList.toggle("fa-eye-slash");
-    });
-</script>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required />
+        </div>
 
+        <div class="mb-3">
+          <label for="signupPassword" class="form-label">Password</label>
+          <div class="input-group">
+            <input type="password" class="form-control" id="signupPassword" name="password" placeholder="Enter password" required />
+            <span class="input-group-text toggle-password">
+              <i class="fa-solid fa-eye"></i>
+            </span>
+          </div>
+        </div>
+
+        <div class="d-grid mb-3">
+          <button type="submit" class="btn btn-primary">Signup</button>
+        </div>
+
+        <div class="text-center">
+          <span>Already have an account? <a href="{% url 'login' %}" class="link-primary">Login</a></span>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 {% endblock %}

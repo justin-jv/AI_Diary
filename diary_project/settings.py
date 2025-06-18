@@ -126,6 +126,9 @@ TIME_ZONE = 'Asia/Kolkata'
 
 STATIC_URL = 'static/'
 
+STATIC_DIRS =   [
+    BASE_DIR / "diary" / "static",
+]
 
 
 # Default primary key field type

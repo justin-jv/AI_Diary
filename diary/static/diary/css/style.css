@@ -1,0 +1,143 @@
+/* 🌌 Darker Modern Login Theme - Updated Card + Background */
+
+.login-body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1f2c3a, #3c4b57); /* 🎨 Muted deep background */
+  padding: 20px;
+  font-family: "Segoe UI", sans-serif;
+  color: #fff;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-wrapper {
+  width: 100%;
+  max-width: 420px;
+  padding: 0 15px;
+}
+
+.login-card {
+  background: #2f3640; /* 🌑 Darker card */
+  border-radius: 18px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+  padding: 45px 30px;
+  animation: fadeInUp 0.6s ease;
+  transition: all 0.3s ease;
+}
+
+.login-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.5);
+}
+
+.login-card h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #dcdde1;
+}
+
+/* Input field styling */
+.form-control {
+  background-color: #222831;
+  border: 1px solid #555;
+  border-radius: 8px;
+  padding: 12px;
+  color: #eee !important;  /* ✅ consistent light text */
+  font-size: 14px;
+}
+
+.form-control::placeholder {
+  color: #aaa;
+  font-size: 13px;
+}
+
+.form-control:focus {
+  background-color: #222831;
+  border-color: #4e9eff;
+  box-shadow: 0 0 0 2px rgba(78, 158, 255, 0.2);
+  color: #eee !important;  /* ✅ same light color on focus */
+}
+
+.input-group-text {
+  background-color: #404b5a;
+  border: 1px solid #555f6d;
+  border-left: none;
+  border-radius: 0 10px 10px 0;
+  cursor: pointer;
+  color: #a4b0be;
+  transition: background 0.2s;
+}
+
+.toggle-password i {
+  transition: color 0.2s;
+}
+
+.toggle-password:hover i {
+  color: #00cec9;
+}
+
+.btn-primary {
+  background: #00cec9;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  width: 100%;
+  transition: background 0.3s ease;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #01b4b0;
+}
+
+.link-secondary {
+  color: #dcdde1 !important;
+  font-size: 14px;
+}
+
+.link-secondary:hover {
+  color: #ffffff !important;
+  text-decoration: underline;
+}
+
+.link-primary {
+  color: #00cec9 !important;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.link-primary:hover {
+  text-decoration: underline;
+}
+
+.text-center span {
+  color: #bdc3c7;
+  font-size: 14px;
+}
+
+@media (max-width: 500px) {
+  .login-card {
+    padding: 30px 20px;
+  }
+}
