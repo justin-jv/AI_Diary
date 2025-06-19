@@ -44,19 +44,27 @@
       <div class="col-md-4">
         <div class="info-card shadow-sm">
           <h5>Total Diaries</h5>
-          <p class="display-6">{{ diary_count }}</p>
+          <p class="display-6">{{ total_diaries }}</p>
         </div>
       </div>
       <div class="col-md-4">
         <div class="info-card shadow-sm">
           <h5>Last Created</h5>
-          <p class="text-muted">{{ last_diary.title }}<br><small>{{ last_diary.created_at|date:"F d, Y" }}</small></p>
+          {% if total_diaries == 0 %}
+          <p class="text-muted"> No Entries Yet </p>
+          {% else %}
+          <p class="text-muted">'<strong>{{ last_created.title }}</strong>' on <small>{{ last_created.created_at|date:"F d, Y" }}</small></p>
+          {% endif %}
         </div>
       </div>
       <div class="col-md-4">
         <div class="info-card shadow-sm">
-          <h5>Last Login</h5>
-          <p class="text-muted">{{ user.last_login|date:"F d, Y H:i" }}</p>
+          <h5>Diary Access Status</h5>
+          {% if user.is_diary_blocked %}
+            <p class="text-danger fw-bold">Blocked</p>
+          {% else %}
+            <p class="text-success fw-bold">Active</p>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -64,7 +72,7 @@
     <!-- Latest Diaries Section -->
     <div class="latest-diaries">
       <h4 class="mb-4">Latest Entries</h4>
-      {% if latest_diaries %}
+      {% if latest_diaries and not user.is_diary_blocked%}
         <div class="list-group">
           {% for diary in latest_diaries %}
             <a href="{% url 'diary_detail' diary.id %}" class="list-group-item list-group-item-action">

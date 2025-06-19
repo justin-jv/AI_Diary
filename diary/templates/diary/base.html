@@ -1,4 +1,5 @@
 {% load static %}
+{% load tz %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,5 +45,21 @@
       });
     }, 3000);
   </script>
+
+  {% if request.resolver_match.url_name not in "login signup forgot_password" %}
+  <footer class="footer mt-auto py-4 bg-white border-top shadow-sm">
+    <div class="container text-center">
+      <p class="mb-1 text-muted">
+        &copy; {{ now|date:"Y" }} <strong>MyDiary</strong>. All rights reserved.
+      </p>
+      <p class="mb-0">
+        <a href="https://www.linkedin.com/in/justin-jv/" target="_blank" class="footer-link">
+          Connect with Me on LinkedIn <i class="fab fa-linkedin me-1"></i> 
+        </a>
+      </p>
+    </div>
+  </footer>
+{% endif %}
+
 </body>
 </html>

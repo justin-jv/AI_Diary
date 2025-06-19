@@ -22,7 +22,22 @@ CustomUser = get_user_model()
 # Home Page
 @login_required(login_url='login')
 def home(request):
-    return render(request, 'diary/home.html')
+    user = request.user
+    if not user.is_authenticated:
+        return redirect('login')
+
+    total_diaries = DiaryEntry.objects.filter(user=user).count()
+    last_created = DiaryEntry.objects.filter(user=user).order_by('-created_at').first()
+    latest_diaries = DiaryEntry.objects.filter(user=user).order_by('-created_at')[:5]
+    diary_status = "Active" if not user.is_diary_blocked else "Blocked"
+
+    context = {
+        'total_diaries': total_diaries,
+        'last_created': last_created,
+        'diary_status': diary_status,
+        'latest_diaries': latest_diaries,
+    }
+    return render(request, 'diary/home.html',context)
 
 # Signup Page
 def signup_view(request):

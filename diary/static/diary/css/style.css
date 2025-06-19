@@ -141,3 +141,21 @@
     padding: 30px 20px;
   }
 }
+
+.footer {
+  font-size: 14px;
+  color: #666;
+  background-color: #f9f9f9;
+}
+
+.footer-link {
+  color: #0077b5;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.footer-link:hover {
+  color: #005582;
+  text-decoration: underline;
+}
