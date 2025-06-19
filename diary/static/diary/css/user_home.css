@@ -1,0 +1,86 @@
+/* 🌤️ Light-themed User Homepage */
+
+.user-home {
+  background-color: #f5f6fa;
+  min-height: 100vh;
+  padding-top: 30px;
+}
+
+.navbar {
+  background-color: #ffffff !important;
+  border-bottom: 1px solid #ddd;
+}
+
+.navbar-brand {
+  color: #333 !important;
+  font-weight: bold;
+}
+
+.nav-link {
+  color: #555 !important;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  color: #000 !important;
+}
+
+.welcome-box h2 {
+  color: #2c3e50;
+}
+
+/* 📜 Quote style for welcome caption */
+.diary-quote {
+  font-family: 'Georgia', serif;
+  font-style: italic;
+  font-size: 1.4rem;
+  color: #555;
+  max-width: 700px;
+  margin: 0 auto;
+  margin-top: 10px;
+  line-height: 1.6;
+  opacity: 0.9;
+  animation: fadeInQuote 1.2s ease-in-out;
+}
+
+@keyframes fadeInQuote {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 0.9;
+    transform: translateY(0);
+  }
+}
+
+.info-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+}
+
+.info-card h5 {
+  font-size: 1rem;
+  color: #555;
+}
+
+.info-card p {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #000;
+}
+
+.latest-diaries .list-group-item {
+  border: 1px solid #e4e4e4;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  background-color: #fff;
+}
+
+.latest-diaries h4 {
+  color: #333;
+}
