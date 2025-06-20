@@ -1,0 +1,136 @@
+/* 🌤️ Enhanced Light Glassmorphism for Create Diary Page */
+
+body {
+  background: linear-gradient(to right, #e0eafc, #cfdef3);
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #2c3e50;
+}
+
+.create-diary-container {
+  max-width: 600px;
+  margin: 60px auto;
+  background: rgba(255, 255, 255, 0.573);
+  border-radius: 20px;
+  padding: 40px 30px;
+  box-shadow: 0 8px 30px rgba(255, 252, 252, 0.15);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.create-diary-container h2 {
+  text-align: center;
+  color: #34495e;
+  font-weight: 700;
+  font-size: 26px;
+  margin-bottom: 30px;
+}
+
+form .form-control {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #6868684f;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 15px;
+  margin-bottom: 20px;
+  resize: none;
+  color: #000000 !important;
+  transition: box-shadow 0.2s ease;
+}
+
+form .form-control::placeholder {
+  color: #6d6d6d;
+}
+
+form .form-control:focus {
+  outline: none;
+  border-color: #00a8ff;
+  color: black !important;
+  background-color: white;
+  box-shadow: 0 0 0 2px rgba(193, 201, 205, 0.622);
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+form .btn {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+form .btn-primary {
+  background-color: #00cec9;
+  color: white;
+  border: none;
+}
+
+form .btn-primary:hover {
+  background-color: #00b5ae;
+}
+
+form .btn-secondary {
+  background-color: #dcdcde;
+  color: #2f3542;
+  border: none;
+}
+
+form .btn-secondary:hover {
+  background-color: #dcdde1;
+  color: #2f3542
+}
+
+@media (max-width: 768px) {
+  .create-diary-container {
+    margin: 30px 15px;
+    padding: 30px 20px;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  form .btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+/* Navbar Styling Enhancement */
+.navbar .nav-link {
+  font-weight: 600;
+  color: #34495e !important;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.navbar .nav-link:hover {
+  transform: translateY(-2px);
+  color: #e3e6e8 !important;
+}
+
+.navbar .navbar-brand {
+  font-weight: 700;
+  font-size: 22px;
+  color: #2c3e50 !important;
+  transition: transform 0.2s;
+}
+
+.navbar .navbar-brand:hover {
+  transform: scale(1.05);
+}
