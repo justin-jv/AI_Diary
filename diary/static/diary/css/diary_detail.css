@@ -1,0 +1,56 @@
+/* 📖 Diary Detail Page Style */
+
+body {
+  background: linear-gradient(to right, #e0eafc, #cfdef3);
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #2c3e50;
+}
+
+.diary-box {
+  max-width: 700px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 40px 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.diary-box h2 {
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.diary-content {
+  font-size: 18px;
+  color: #34495e;
+  font-family: 'Merriweather', serif;
+  white-space: pre-wrap;
+  line-height: 1.6;
+}
+
+.btn-outline-secondary {
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  .diary-box {
+    margin: 20px;
+    padding: 25px 20px;
+  }
+
+  .diary-box h2 {
+    font-size: 22px;
+  }
+
+  .diary-content {
+    font-size: 15px;
+  }
+}

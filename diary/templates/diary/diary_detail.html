@@ -1,13 +1,63 @@
 {% extends 'diary/base.html' %}
+{% load static %}
+
+{% block title %}Diary View - MyDiary{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'diary/css/diary_detail.css' %}">
+{% endblock %}
+
 {% block content %}
-<h2>{{ diary.title }}</h2>
-<p>{{ diary.content }}</p>
+<div class="diary-detail light-theme">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm animate__animated animate__fadeInDown">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="{% url 'home' %}">MyDiary</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link btn btn-outline-primary mx-2" href="{% url 'home' %}">
+              <i class="fas fa-home"></i> Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn btn-outline-danger" href="{% url 'logout' %}">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-{% comment %}
-<small>Created on: {{ diary.created_at }}</small>
-{% endcomment %}
+  <!-- Diary Content -->
+  <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh">
+    <div class="diary-box animate__animated animate__fadeInUp">
+      <h2 class="mb-3 text-center">{{ diary.title|capfirst }}</h2>
+      <p class="text-muted small">
+        Created on: {{ diary.created_at|date:"F d, Y \\a\\t h:i A" }}
+      </p>
+      <div class="diary-content mt-4 ">{{ diary.content|capfirst|linebreaks }}</div>
 
-<p><strong>Created on: </strong> {{ diary.created_at|date:"F d, Y \\a\\t h:i A"}}</p>
-<br><br>
-<a href="{% url 'diary_list' %}">Back to All Diaries</a>
+      <div class="text-center mt-4">
+        {% if diary.sentiment == 'positive' %}
+          <span class="badge bg-info text-dark px-3 py-2 fs-6">Mood: {{ diary.sentiment|capfirst }}</span>
+        {% elif diary.sentiment == 'negative' %}
+          <span class="badge bg-danger text-light px-3 py-2 fs-6">Mood: {{ diary.sentiment|capfirst }}</span>
+        {% else %}
+          <span class="badge bg-warning text-dark px-3 py-2 fs-6">Mood: {{ diary.sentiment|capfirst }}</span>
+        {% endif %}
+      </div>
+
+      <div class="text-center mt-5">
+        <a href="{% url 'diary_list' %}" class="btn btn-outline-secondary">
+          <i class="fas fa-arrow-left"></i> Back to All Diaries
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
