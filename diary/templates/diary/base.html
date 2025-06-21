@@ -24,20 +24,6 @@
     </div>
   {% endif %} {% endcomment %}
 
-  {% comment %}<div class="container mt-2">
-     {% if messages %}
-  <div class="container mt-3">
-    {% for message in messages %}
-      <div class="alert alert-{{ message.tags }} alert-dismissible fade show shadow-sm animate__animated animate__fadeInDown" role="alert">
-        <i class="fa {% if message.tags == 'success' %}fa-check-circle text-success{% elif message.tags == 'error' %}fa-times-circle text-danger{% elif message.tags == 'warning' %}fa-exclamation-triangle text-warning{% else %}fa-info-circle text-info{% endif %} me-2"></i>
-        {{ message }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    {% endfor %}
-  </div>
-{% endif %} 
-
-  </div> {% endcomment %}
 
   <div aria-live="polite" aria-atomic="true" class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999;">
   {% for message in messages %}
