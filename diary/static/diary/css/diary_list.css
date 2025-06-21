@@ -97,3 +97,63 @@ body {
   color: #00b5ae;
   text-decoration: underline;
 }
+
+.quote-text {
+  font-style: italic;
+  font-size: 20px;
+  color: #6c757d;
+  padding: 6px 12px;
+  display: inline-block;
+}
+
+
+.diary-card {
+  background: rgba(255, 255, 255, 0.2); /* Transparent */
+  backdrop-filter: blur(10px); /* Blur effect */
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  padding: 25px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 206, 201, 0.4);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(0, 206, 201, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 206, 201, 0);
+  }
+}
+
+.pulse-btn {
+  animation: pulse 2s infinite;
+}
+
+
+.add-btn-absolute {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  padding: 10px 16px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+@media (max-width: 768px) {
+  .add-btn-absolute {
+    position: static;
+    display: block;
+    margin: 10px auto 0;
+  }
+}
