@@ -14,3 +14,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const toast = document.querySelector('.toast');
+
+    if (toast) {
+      setTimeout(() => {
+        toast.classList.add('fade-out');
+        setTimeout(() => {
+          toast.remove();
+        }, 600); // Match the exit animation duration
+      }, 3000); // Wait 3s before dismiss
+    }
+  });
